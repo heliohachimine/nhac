@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.CameraActivity"
+    android:background="@color/yellow_300">
+    <io.fotoapparat.view.CameraView
+        android:id="@+id/cameraView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:background="@drawable/rounded_camera"
+        app:layout_constraintCircleRadius="@dimen/default_margin"
+        android:layout_marginStart="@dimen/large_margin"
+        android:layout_marginEnd="@dimen/large_margin"
+        android:layout_marginTop="@dimen/large_margin"
+        android:layout_marginBottom="@dimen/largest_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/anim_sparkles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:lottie_rawRes="@raw/sparkles"
+        app:lottie_autoPlay="false"
+        app:lottie_loop="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/camera_button"/>
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/camera_button"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_camera"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/rounded_ic_camera"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

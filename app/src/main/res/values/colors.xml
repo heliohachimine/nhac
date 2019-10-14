@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+    <color name="yellow_500">#AFA100</color>
+    <color name="yellow_300">#FFEA00</color>
+
+    <color name="orange_500">#CB5700</color>
+    <color name="orange_300">#FB8604</color>
+
+    <color name="green_300">#7FBD32</color>
+
+    <color name="purple_500">#311B92</color>
+    <color name="purple_300">#931AEF</color>
+
+    <color name="light_blue_900">#01579B</color>
+    <color name="light_blue_500">#03A9F4</color>
+
+
+
+
+
+</resources>

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "336860546274",
+    "firebase_url": "https://nhac-9bcd5.firebaseio.com",
+    "project_id": "nhac-9bcd5",
+    "storage_bucket": "nhac-9bcd5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:336860546274:android:47d1d576ebe1928d474abb",
+        "android_client_info": {
+          "package_name": "com.example.helio.nhac"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "336860546274-89skggg10c70sb2g08af8prurf7oluqc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJ_H_mF00mfsPx_h7L5z14WQpm5IGSMJ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "336860546274-89skggg10c70sb2g08af8prurf7oluqc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

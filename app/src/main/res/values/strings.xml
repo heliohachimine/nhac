@@ -1,3 +1,51 @@
 <resources>
     <string name="app_name">Nhac</string>
+
+    <string name="tomato">Tomate</string>
+    <string name="tomato_details">Apesar de ser considerado por muitos um legume, o tomate é uma
+        fruta. Originário das Américas Central e do Sul, hoje o tomate é cultivado e consumido em
+        todos os continentes. ... Além do licopeno, o tomate contém vitaminas A, B e C, e sais
+        minerais como fósforo, ferro e potássio.</string>
+
+    <string name="pineapple">Abacaxi</string>
+    <string name="pineapple_details">Apesar de ser considerado por muitos um legume, o tomate é uma
+        fruta. Originário das Américas Central e do Sul, hoje o tomate é cultivado e consumido em
+        todos os continentes. ... Além do licopeno, o tomate contém vitaminas A, B e C, e sais
+        minerais como fósforo, ferro e potássio.</string>
+
+    <string name="avocado">Abacate</string>
+    <string name="avocado_details">Apesar de ser considerado por muitos um legume, o tomate é uma
+        fruta. Originário das Américas Central e do Sul, hoje o tomate é cultivado e consumido em
+        todos os continentes. ... Além do licopeno, o tomate contém vitaminas A, B e C, e sais
+        minerais como fósforo, ferro e potássio.</string>
+
+    <string name="lemon">Limão</string>
+    <string name="lemon_details">Apesar de ser considerado por muitos um legume, o tomate é uma
+        fruta. Originário das Américas Central e do Sul, hoje o tomate é cultivado e consumido em
+        todos os continentes. ... Além do licopeno, o tomate contém vitaminas A, B e C, e sais
+        minerais como fósforo, ferro e potássio.</string>
+
+    <string name="strawberry">Morango</string>
+    <string name="strawberry_details">Apesar de ser considerado por muitos um legume, o tomate é uma
+        fruta. Originário das Américas Central e do Sul, hoje o tomate é cultivado e consumido em
+        todos os continentes. ... Além do licopeno, o tomate contém vitaminas A, B e C, e sais
+        minerais como fósforo, ferro e potássio.</string>
+
+    <string name="watermelon">Melancia</string>
+    <string name="watermelon_details">Apesar de ser considerado por muitos um legume, o tomate é uma
+        fruta. Originário das Américas Central e do Sul, hoje o tomate é cultivado e consumido em
+        todos os continentes. ... Além do licopeno, o tomate contém vitaminas A, B e C, e sais
+        minerais como fósforo, ferro e potássio.</string>
+
+    <string name="banana">Banana</string>
+    <string name="banana_details">Por ser um fruto partenocárpico, a banana não possui sementes,
+        com exceção de uma espécie vendida no mercado indonésio, a Musa balbisiana. A banana contém
+        grandes quantidades de açúcares: sacarose, frutose e glicose. Além disso, a fruta é rica em
+        fibras, vitaminas A, B1, B2 e C, cálcio, fósforo e ferro.</string>
+
+    <string name="coconut">Coco</string>
+    <string name="coconut_details">O coco é o fruto produzido pelo coqueiro que contém componentes
+        que beneficiam o organismo humano. É um fruto carnoso, de casca fibrosa, endocarpo duro,
+        de semente esbranquiçada e suculenta utilizada na alimentação juntamente com a água que
+        se encontra dentro da semente.</string>
 </resources>

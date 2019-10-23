@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "336860546274-kk6rfur2bfg5a184546iurjd7at12911.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.helio.nhac",
+            "certificate_hash": "bc15a4c372512af9332210fef182520f28084d91"
+          }
+        },
+        {
           "client_id": "336860546274-89skggg10c70sb2g08af8prurf7oluqc.apps.googleusercontent.com",
           "client_type": 3
         }

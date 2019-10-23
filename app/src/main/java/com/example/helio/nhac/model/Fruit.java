@@ -1,8 +1,6 @@
-package com.example.helio.nhac.presentation.Model;
+package com.example.helio.nhac.model;
 
-import com.example.helio.nhac.R;
-
-public class Fruit {
+public class Fruit{
     private String name;
     private Boolean isCollected;
     private int image;
@@ -12,6 +10,13 @@ public class Fruit {
         this.name = name;
         this.isCollected = isCollected;
         this.image = image;
+        this.details = "Informações sobre " + name;
+    }
+    public Fruit(String name, Boolean isCollected, int image, String details){
+        this.name = name;
+        this.isCollected = isCollected;
+        this.image = image;
+        this.details = details;
     }
 
     public String getName() {

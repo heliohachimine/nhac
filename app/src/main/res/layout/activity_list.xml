@@ -19,7 +19,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.example.helio.nhac.presentation.Model.GridRecyclerView
+    <com.example.helio.nhac.model.GridRecyclerView
         android:id="@+id/recycler_view_layout_recycler"
         android:layout_width="match_parent"
         android:layout_height="0dp"

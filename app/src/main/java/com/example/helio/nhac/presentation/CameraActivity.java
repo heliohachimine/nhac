@@ -1,7 +1,6 @@
 package com.example.helio.nhac.presentation;
 
 import android.Manifest;
-import android.app.Application;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,13 +13,19 @@ import androidx.core.content.ContextCompat;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.helio.nhac.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.ml.common.FirebaseMLException;
+import com.google.firebase.ml.common.modeldownload.FirebaseModelDownloadConditions;
+import com.google.firebase.ml.common.modeldownload.FirebaseModelManager;
 import com.google.firebase.ml.vision.FirebaseVision;
+import com.google.firebase.ml.vision.automl.FirebaseAutoMLRemoteModel;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.google.firebase.ml.vision.label.FirebaseVisionImageLabel;
-import com.google.firebase.ml.vision.label.FirebaseVisionImageLabeler;
+import com.google.firebase.ml.vision.label.FirebaseVisionOnDeviceAutoMLImageLabelerOptions;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -42,11 +47,25 @@ public class CameraActivity extends AppCompatActivity {
     private Fotoapparat fotoapparat;
     private CameraView cameraView;
     private LottieAnimationView sparkles;
+    private FirebaseAutoMLRemoteModel remoteModel;
+    private Boolean modelIsDownloaded = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FirebaseApp.initializeApp(this);
+        FirebaseModelDownloadConditions conditions = new FirebaseModelDownloadConditions.Builder()
+                .requireWifi()
+                .build();
+        remoteModel = new FirebaseAutoMLRemoteModel.Builder("vegetais_20191013174649").build();
+        FirebaseModelManager.getInstance().download(remoteModel, conditions)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        modelIsDownloaded = true;
+                    }
+                });
+
         setContentView(R.layout.activity_camera);
         cameraView = findViewById(R.id.cameraView);
         sparkles = findViewById(R.id.anim_sparkles);
@@ -56,9 +75,9 @@ public class CameraActivity extends AppCompatActivity {
         findViewById(R.id.camera_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //takePicture();
+                takePicture();
+                sparkles.setVisibility(View.VISIBLE);
                 sparkles.playAnimation();
-                Toast.makeText(getBaseContext(), "Foto salva", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -87,33 +106,56 @@ public class CameraActivity extends AppCompatActivity {
         photo.toBitmap().whenDone(new WhenDoneListener<BitmapPhoto>() {
             @Override
             public void whenDone(BitmapPhoto bitmap) {
-                CameraActivity.this.doImageRecognition(bitmap.bitmap);
+                try {
+                    doImageRecognition(bitmap.bitmap);
+                } catch (FirebaseMLException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
     }
 
-    private void doImageRecognition(Bitmap bitmapPhoto) {
-        FirebaseApp.initializeApp(this);
-        FirebaseVisionImage firebaseVisionImage = FirebaseVisionImage.fromBitmap(bitmapPhoto);
-        FirebaseVisionImageLabeler detector = FirebaseVision.getInstance().getOnDeviceImageLabeler();
-        detector.processImage(firebaseVisionImage)
-                .addOnSuccessListener(
-                        new OnSuccessListener<List<FirebaseVisionImageLabel>>() {
-                            @Override
+    private void doImageRecognition(Bitmap bitmapPhoto) throws FirebaseMLException {
 
-                            public void onSuccess(List<FirebaseVisionImageLabel> it) {
-                                List<FirebaseVisionImageLabel> labels = it;
-                                Log.d("LIST", labels.toString());
+        if (modelIsDownloaded) {
+            FirebaseApp.initializeApp(this);
+            FirebaseVisionImage firebaseVisionImage = FirebaseVisionImage.fromBitmap(bitmapPhoto);
+            FirebaseVisionOnDeviceAutoMLImageLabelerOptions labelerOptions =
+                    new FirebaseVisionOnDeviceAutoMLImageLabelerOptions.Builder(remoteModel).build();
+            FirebaseVision.getInstance().getOnDeviceAutoMLImageLabeler(labelerOptions).processImage(firebaseVisionImage)
+                    .addOnSuccessListener(
+                            new OnSuccessListener<List<FirebaseVisionImageLabel>>() {
+                                @Override
+                                public void onSuccess(List<FirebaseVisionImageLabel> it) {
+//                                    progress.dismiss();
+                                    sparkles.cancelAnimation();
+                                    sparkles.setVisibility(View.GONE);
+
+                                    if (it.size() == 0) {
+                                        Toast.makeText(getApplicationContext(), "Não foi possivel reconhecer", Toast.LENGTH_SHORT).show();
+                                    }
+                                    for (FirebaseVisionImageLabel label: it) {
+                                        Log.d("LIST", label.getText());
+                                        if (label.getConfidence() < 0.6)
+                                            Toast.makeText(getApplicationContext(), "Acho que pode ser " + label.getText(), Toast.LENGTH_SHORT ).show();
+                                        if (label.getConfidence() > 0.6)
+                                            Toast.makeText(getApplicationContext(), label.getText(), Toast.LENGTH_SHORT ).show();
+                                    }
+
+                                }
                             }
-                        }
 
-        ).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-
-            }
-        });
+                    ).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d("LIST", e.getMessage());
+                    sparkles.cancelAnimation();
+                    sparkles.setVisibility(View.GONE);
+                    Toast.makeText(getApplicationContext(), "Não foi possivel reconhecer", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
 }

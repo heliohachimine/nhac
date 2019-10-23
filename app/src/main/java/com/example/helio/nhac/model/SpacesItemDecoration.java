@@ -1,4 +1,4 @@
-package com.example.helio.nhac.presentation.Model;
+package com.example.helio.nhac.model;
 
 import android.graphics.Rect;
 import android.view.View;

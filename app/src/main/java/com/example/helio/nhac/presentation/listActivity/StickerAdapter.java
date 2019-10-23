@@ -1,7 +1,6 @@
 package com.example.helio.nhac.presentation.listActivity;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,13 +8,11 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helio.nhac.R;
+import com.example.helio.nhac.model.Fruit;
 import com.example.helio.nhac.presentation.DetailActivity;
-import com.example.helio.nhac.presentation.Model.Fruit;
 
 import java.util.ArrayList;
 

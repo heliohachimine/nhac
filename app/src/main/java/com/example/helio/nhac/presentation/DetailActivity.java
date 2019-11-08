@@ -31,7 +31,6 @@ public class DetailActivity extends AppCompatActivity {
         tts = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
-                // TODO Auto-generated method stub
                 if (status == TextToSpeech.SUCCESS) {
                     int result = tts.setLanguage(Locale.getDefault());
                     if (result == TextToSpeech.LANG_MISSING_DATA ||

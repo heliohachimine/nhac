@@ -4,9 +4,9 @@ package com.example.helio.nhac.presentation.listActivity;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helio.nhac.R;
-import com.example.helio.nhac.data.FruitDatabase;
 import com.example.helio.nhac.data.dao.FruitDao;
 import com.example.helio.nhac.model.Fruit;
 import com.example.helio.nhac.model.GridRecyclerView;
@@ -35,8 +34,14 @@ public class ListActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.orange_300));
         setupRecycler();
-//        dumbData();
         runLayoutAnimation(mRecyclerView);
+        findViewById(R.id.title_list).setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                dumbData();
+                return false;
+            }
+        });
 
     }
 
@@ -71,33 +76,53 @@ public class ListActivity extends AppCompatActivity {
         recyclerView.scheduleLayoutAnimation();
     }
 
-    private Boolean initialize(){
-        return dao.insert(getString(R.string.coconut), getString(R.string.coconut_details),
+    private Boolean initialize() {
+        return dao.insert("coconut",
+                getString(R.string.coconut), getString(R.string.coconut_details),
                 0, R.drawable.coco) &
-        dao.insert(getString(R.string.pineapple), getString(R.string.pineapple_details),
-                0, R.drawable.abacaxi) &
-        dao.insert(getString(R.string.avocado), getString(R.string.avocado_details),
-                0, R.drawable.abacate) &
-        dao.insert(getString(R.string.banana),getString(R.string.banana_details),
-                0, R.drawable.banana) &
-        dao.insert(getString(R.string.lemon), getString(R.string.lemon_details),
-                0, R.drawable.limao) &
-        dao.insert(getString(R.string.tomato), getString(R.string.tomato),
-                0, R.drawable.tomate) &
-        dao.insert(getString(R.string.strawberry), getString(R.string.strawberry_details),
-                0, R.drawable.morango) &
-        dao.insert(getString(R.string.watermelon), getString(R.string.watermelon_details),
-                0, R.drawable.melancia);
+                dao.insert("pineapple",
+                        getString(R.string.pineapple), getString(R.string.pineapple_details),
+                        0, R.drawable.abacaxi) &
+                dao.insert("avocado",
+                        getString(R.string.avocado), getString(R.string.avocado_details),
+                        0, R.drawable.abacate) &
+                dao.insert("banana",
+                        getString(R.string.banana), getString(R.string.banana_details),
+                        0, R.drawable.banana) &
+                dao.insert("lemon",
+                        getString(R.string.lemon), getString(R.string.lemon_details),
+                        0, R.drawable.limao) &
+                dao.insert("tomato",
+                        getString(R.string.tomato), getString(R.string.tomato),
+                        0, R.drawable.tomate) &
+                dao.insert("strawberry",
+                        getString(R.string.strawberry), getString(R.string.strawberry_details),
+                        0, R.drawable.morango) &
+                dao.insert("watermelon",
+                        getString(R.string.watermelon), getString(R.string.watermelon_details),
+                        0, R.drawable.melancia) &
+                dao.insert("pumpkin",
+                        getString(R.string.pumpkin), getString(R.string.pumpkin_details),
+                        0, R.drawable.abobora) &
+                dao.insert("broccoli",
+                        getString(R.string.broccoli), getString(R.string.broccoli_details),
+                        0, R.drawable.brocolis) &
+                dao.insert("carrot",
+                        getString(R.string.carrot), getString(R.string.carrot_details),
+                        0, R.drawable.cenoura);
     }
 
-    private void dumbData(){
-        fruitArrayList.add(new Fruit("coco", true, R.drawable.coco, getString(R.string.coconut_details)));
-        fruitArrayList.add(new Fruit("abacaxi", false, R.drawable.abacaxi));
-        fruitArrayList.add(new Fruit("abacate", false, R.drawable.abacate));
-        fruitArrayList.add(new Fruit("banana", true, R.drawable.banana, getString(R.string.banana_details)));
-        fruitArrayList.add(new Fruit("limâo", false, R.drawable.limao));
-        fruitArrayList.add(new Fruit("tomate", true, R.drawable.tomate, getString(R.string.tomato_details)));
-        fruitArrayList.add(new Fruit("morango", false, R.drawable.morango));
-        fruitArrayList.add(new Fruit("melancia", false, R.drawable.melancia));
+    private void dumbData() {
+        fruitArrayList.clear();
+        fruitArrayList.add(new Fruit("coconut", "coco", true, R.drawable.coco, getString(R.string.coconut_details)));
+        fruitArrayList.add(new Fruit("pineapple", "abacaxi", true, R.drawable.abacaxi, getString(R.string.pineapple_details)));
+        fruitArrayList.add(new Fruit("avocado", "abacate", true, R.drawable.abacate, getString(R.string.avocado_details)));
+        fruitArrayList.add(new Fruit("banana", "banana", true, R.drawable.banana, getString(R.string.banana_details)));
+        fruitArrayList.add(new Fruit("lemon", "limâo", true, R.drawable.limao, getString(R.string.lemon_details)));
+        fruitArrayList.add(new Fruit("tomato", "tomate", true, R.drawable.tomate, getString(R.string.tomato_details)));
+        fruitArrayList.add(new Fruit("strawberry", "morango", true, R.drawable.morango, getString(R.string.strawberry_details)));
+        fruitArrayList.add(new Fruit("watermelon", "melancia", true, R.drawable.melancia, getString(R.string.watermelon_details)));
+        mAdapter = new StickerAdapter(fruitArrayList);
+        mRecyclerView.setAdapter(mAdapter);
     }
 }

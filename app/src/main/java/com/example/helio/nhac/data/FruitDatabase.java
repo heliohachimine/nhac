@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class FruitDatabase extends SQLiteOpenHelper {
 
     public static final String NOME_BANCO = "data.db";
+    public static final String ID_NAME = "id_name";
     public static final String TABELA = "fruits";
     public static final String ID = "_id";
     public static final String FRUIT_NAME = "fruit";
@@ -26,7 +27,8 @@ public class FruitDatabase extends SQLiteOpenHelper {
                 + IMAGE + " INTEGER,"
                 + IS_COLLECTED + " INTEGER,"
                 + DETAILS + " TEXT,"
-                + FRUIT_NAME + " TEXT"
+                + FRUIT_NAME + " TEXT,"
+                + ID_NAME + " TEXT"
                 +");";
         db.execSQL(sql);
     }

@@ -1,22 +1,33 @@
 package com.example.helio.nhac.model;
 
 public class Fruit{
+    private String id_name;
     private String name;
     private Boolean isCollected;
     private int image;
     private String details;
 
-    public Fruit(String name, Boolean isCollected, int image){
+    public Fruit(String id_name, String name, Boolean isCollected, int image){
+        this.id_name = id_name;
         this.name = name;
         this.isCollected = isCollected;
         this.image = image;
         this.details = "Informações sobre " + name;
     }
-    public Fruit(String name, Boolean isCollected, int image, String details){
+    public Fruit(String id_name, String name, Boolean isCollected, int image, String details){
+        this.id_name = id_name;
         this.name = name;
         this.isCollected = isCollected;
         this.image = image;
         this.details = details;
+    }
+
+    public String getId_name() {
+        return id_name;
+    }
+
+    public void setId_name(String id_name) {
+        this.id_name = id_name;
     }
 
     public String getName() {

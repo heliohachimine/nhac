@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".presentation.listActivity.ListActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".presentation.CameraActivity"
+        <activity android:name=".presentation.cameraActivity.CameraActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".presentation.DetailActivity"
             android:screenOrientation="portrait"/>

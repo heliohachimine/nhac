@@ -1,41 +1,29 @@
 <resources>
     <string name="app_name">Nhac</string>
 
-    <string name="tomato">Tomate</string>
-    <string name="tomato_details">Apesar de ser considerado por muitos um legume, o tomate é uma
-        fruta. Originário das Américas Central e do Sul, hoje o tomate é cultivado e consumido em
-        todos os continentes. ... Além do licopeno, o tomate contém vitaminas A, B e C, e sais
-        minerais como fósforo, ferro e potássio.</string>
+    <string name="tomato">tomato</string>
+    <string name="tomato_details"> Existem várias espécies de tomates, como : o italiano, o cereja,
+        o caqui e muitos outros. O tomate é rico em cálcio, fósforo, potássio e frutose.</string>
 
     <string name="pineapple">Abacaxi</string>
-    <string name="pineapple_details">Apesar de ser considerado por muitos um legume, o tomate é uma
-        fruta. Originário das Américas Central e do Sul, hoje o tomate é cultivado e consumido em
-        todos os continentes. ... Além do licopeno, o tomate contém vitaminas A, B e C, e sais
-        minerais como fósforo, ferro e potássio.</string>
+    <string name="pineapple_details">O abacaxi ajuda a emagrecer, protege de doenças
+        cardiovasculares e auxilia na recuperação do corpo após exercícios.</string>
 
     <string name="avocado">Abacate</string>
-    <string name="avocado_details">Apesar de ser considerado por muitos um legume, o tomate é uma
-        fruta. Originário das Américas Central e do Sul, hoje o tomate é cultivado e consumido em
-        todos os continentes. ... Além do licopeno, o tomate contém vitaminas A, B e C, e sais
-        minerais como fósforo, ferro e potássio.</string>
+    <string name="avocado_details"> Apesar do alto valor calórico, o abacate é um dos melhores
+        alimentos para controlar o colesterol e minimizar o risco cardíaco.</string>
 
     <string name="lemon">Limão</string>
-    <string name="lemon_details">Apesar de ser considerado por muitos um legume, o tomate é uma
-        fruta. Originário das Américas Central e do Sul, hoje o tomate é cultivado e consumido em
-        todos os continentes. ... Além do licopeno, o tomate contém vitaminas A, B e C, e sais
-        minerais como fósforo, ferro e potássio.</string>
+    <string name="lemon_details">O limão é fonte de fibras, vitamina C e minerais. É também forte
+        aliado na beleza da pele. Saiba tudo o que essa frutinha pode fazer pela sua saúde!</string>
 
     <string name="strawberry">Morango</string>
-    <string name="strawberry_details">Apesar de ser considerado por muitos um legume, o tomate é uma
-        fruta. Originário das Américas Central e do Sul, hoje o tomate é cultivado e consumido em
-        todos os continentes. ... Além do licopeno, o tomate contém vitaminas A, B e C, e sais
-        minerais como fósforo, ferro e potássio.</string>
+    <string name="strawberry_details">A melhor época para se consumir o morango é entre abril e
+        setembro: ele chega às feiras de frutas com seu melhor sabor e perfume!</string>
 
     <string name="watermelon">Melancia</string>
-    <string name="watermelon_details">Apesar de ser considerado por muitos um legume, o tomate é uma
-        fruta. Originário das Américas Central e do Sul, hoje o tomate é cultivado e consumido em
-        todos os continentes. ... Além do licopeno, o tomate contém vitaminas A, B e C, e sais
-        minerais como fósforo, ferro e potássio.</string>
+    <string name="watermelon_details">Melancia é importante fonte de energia para o corpo, rica em
+        vitaminas e minerais.</string>
 
     <string name="banana">Banana</string>
     <string name="banana_details">Por ser um fruto partenocárpico, a banana não possui sementes,
@@ -48,4 +36,19 @@
         que beneficiam o organismo humano. É um fruto carnoso, de casca fibrosa, endocarpo duro,
         de semente esbranquiçada e suculenta utilizada na alimentação juntamente com a água que
         se encontra dentro da semente.</string>
+
+    <string name="pumpkin">Abóbora</string>
+    <string name="pumpkin_details">O coco é o fruto produzido pelo coqueiro que contém componentes
+        que beneficiam o organismo humano. É um fruto carnoso, de casca fibrosa, endocarpo duro,
+        de semente esbranquiçada e suculenta utilizada na alimentação juntamente com a água que
+        se encontra dentro da semente.</string>
+
+    <string name="broccoli">Brócolis</string>
+    <string name="broccoli_details">Brócolis é cultivado como verdura. Pode se consomir as folhas,
+        o caule e as inflorecências. O brócolis possue muitas vitaminas e sais minerais, importantes
+        para uma boa saúde.</string>
+
+    <string name="carrot">Cenoura</string>
+    <string name="carrot_details">A cenoura é uma raiz com muita proteina e vitaminas. A cenoura é o
+        alimento favorito do coelho.</string>
 </resources>

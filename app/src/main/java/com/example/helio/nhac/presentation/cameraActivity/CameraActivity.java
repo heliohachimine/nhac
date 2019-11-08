@@ -1,4 +1,4 @@
-package com.example.helio.nhac.presentation;
+package com.example.helio.nhac.presentation.cameraActivity;
 
 import android.Manifest;
 import android.graphics.Bitmap;
@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.helio.nhac.R;
+import com.example.helio.nhac.data.dao.FruitDao;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -49,15 +50,20 @@ public class CameraActivity extends AppCompatActivity {
     private LottieAnimationView sparkles;
     private FirebaseAutoMLRemoteModel remoteModel;
     private Boolean modelIsDownloaded = false;
+    private FruitDao dao;
+    private RecognizeToast toast;
+    public String textToast;
+    public int imageToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        toast = new RecognizeToast(this);
         FirebaseApp.initializeApp(this);
         FirebaseModelDownloadConditions conditions = new FirebaseModelDownloadConditions.Builder()
-                .requireWifi()
                 .build();
         remoteModel = new FirebaseAutoMLRemoteModel.Builder("vegetais_20191013174649").build();
+
         FirebaseModelManager.getInstance().download(remoteModel, conditions)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -65,7 +71,7 @@ public class CameraActivity extends AppCompatActivity {
                         modelIsDownloaded = true;
                     }
                 });
-
+        dao = new FruitDao(this);
         setContentView(R.layout.activity_camera);
         cameraView = findViewById(R.id.cameraView);
         sparkles = findViewById(R.id.anim_sparkles);
@@ -137,10 +143,51 @@ public class CameraActivity extends AppCompatActivity {
                                     }
                                     for (FirebaseVisionImageLabel label: it) {
                                         Log.d("LIST", label.getText());
-                                        if (label.getConfidence() < 0.6)
-                                            Toast.makeText(getApplicationContext(), "Acho que pode ser " + label.getText(), Toast.LENGTH_SHORT ).show();
-                                        if (label.getConfidence() > 0.6)
-                                            Toast.makeText(getApplicationContext(), label.getText(), Toast.LENGTH_SHORT ).show();
+                                        if (label.getConfidence() < 0.6) {
+//                                            Toast.makeText(getApplicationContext(), "Acho que pode ser " + label.getText(), Toast.LENGTH_SHORT).show();
+                                            switch (label.getText()) {
+                                                case "broccoli":
+                                                    textToast = getString(R.string.broccoli);
+                                                    imageToast = R.drawable.brocolis;
+                                                    break;
+                                                case "carrot":
+                                                    textToast = getString(R.string.carrot);
+                                                    imageToast = R.drawable.cenoura;
+                                                    break;
+                                                case "tomato":
+                                                    textToast = getString(R.string.tomato);
+                                                    imageToast = R.drawable.tomate;
+                                                    break;
+                                                default:
+                                                    textToast = "Sem detalhes";
+                                                    imageToast = R.drawable.abacate;
+                                                    break;
+                                            }
+                                            toast.show();
+//                                            textToast = "";
+                                        }
+                                        else if (label.getConfidence() > 0.6)
+                                            dao.activate(label.getText());
+                                            switch (label.getText()) {
+                                                case "broccoli":
+                                                    textToast = getString(R.string.broccoli);
+                                                    imageToast = R.drawable.brocolis;
+                                                    break;
+                                                case "carrot":
+                                                    textToast = getString(R.string.carrot);
+                                                    imageToast = R.drawable.cenoura;
+                                                    break;
+                                                case "tomato":
+                                                    textToast = getString(R.string.tomato);
+                                                    imageToast = R.drawable.tomate;
+                                                    break;
+                                                default:
+                                                    textToast = "Sem detalhes";
+                                                    imageToast = R.drawable.abacate;
+                                                    break;
+                                            }
+                                            toast.show();
+//                                            Toast.makeText(getApplicationContext(), label.getText(), Toast.LENGTH_SHORT ).show();
                                     }
 
                                 }

@@ -60,7 +60,6 @@ public class StickerAdapter extends RecyclerView.Adapter<StickerViewHolder> {
                     v.getContext().startActivity(intent);
                 }
             });
-
         }
     }
 

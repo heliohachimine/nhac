@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.helio.nhac.R;
+import com.example.helio.nhac.presentation.cameraActivity.CameraActivity;
 import com.example.helio.nhac.presentation.listActivity.ListActivity;
 
 import static android.view.View.*;

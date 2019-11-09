@@ -7,6 +7,17 @@
     android:layout_height="match_parent"
     android:background="@color/light_blue_500"
     tools:context=".presentation.DetailActivity">
+    <View
+        android:id="@+id/border_img"
+        android:layout_width="300dp"
+        android:layout_height="250dp"
+        android:background="@drawable/background_img_detail"
+        app:layout_constraintTop_toTopOf="@id/detail_image"
+        app:layout_constraintStart_toStartOf="@id/detail_image"
+        app:layout_constraintEnd_toEndOf="@id/detail_image"
+        app:layout_constraintBottom_toBottomOf="@id/detail_image"
+        />
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/detail_title"
         android:layout_width="match_parent"
@@ -19,10 +30,12 @@
         android:layout_marginHorizontal="@dimen/default_margin"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="Limão"/>
+
     <com.airbnb.lottie.LottieAnimationView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         app:lottie_rawRes="@raw/confetti"
         app:lottie_loop="false"
         app:lottie_autoPlay="true"
@@ -32,14 +45,50 @@
         app:layout_constraintBottom_toBottomOf="@id/detail_image"/>
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/detail_image"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_marginTop="@dimen/default_margin"
+        android:transitionName="figurinha"
         android:layout_marginHorizontal="@dimen/default_margin"
         app:layout_constraintTop_toBottomOf="@id/detail_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:src="@drawable/morangocamera"/>
+        tools:src="@drawable/limao"/>
+
+    <TextView
+        android:id="@+id/did_you_know"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Voce sabia?"
+        android:fontFamily="@font/slimebox"
+        android:textColor="@color/white"
+        android:textSize="@dimen/default_margin"
+        android:layout_margin="@dimen/large_margin"
+        app:layout_constraintTop_toBottomOf="@id/border_img"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+    <ImageView
+        android:id="@+id/speaker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin"
+        android:src="@drawable/ic_speaker"
+        app:layout_constraintTop_toTopOf="@id/did_you_know"
+        app:layout_constraintBottom_toBottomOf="@id/did_you_know"
+        app:layout_constraintStart_toEndOf="@id/did_you_know"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textview_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin"
+        android:fontFamily="@font/slimebox"
+        android:textColor="@color/white"
+        android:textSize="@dimen/default_margin"
+        app:layout_constraintTop_toBottomOf="@id/did_you_know"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="dgudfgfasfhsdhugu asdhuafgua sdhf afuhsau as dafhuas d"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Nhac</string>
 
+    <string name="error_internet">Falha na internet</string>
+    <string name="error_mlkit">Falha no reconhecimento de imagens</string>
+    <string name="error_recognize">Não foi possível reconhecer</string>
+
     <string name="tomato">tomato</string>
     <string name="tomato_details"> Existem várias espécies de tomates, como : o italiano, o cereja,
         o caqui e muitos outros. O tomate é rico em cálcio, fósforo, potássio e frutose.</string>

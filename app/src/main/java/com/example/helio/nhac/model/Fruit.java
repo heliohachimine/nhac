@@ -1,6 +1,9 @@
 package com.example.helio.nhac.model;
 
-public class Fruit{
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Fruit implements Parcelable {
     private String id_name;
     private String name;
     private Boolean isCollected;
@@ -60,5 +63,15 @@ public class Fruit{
 
     public void setDetails(String details) {
         this.details = details;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
     }
 }

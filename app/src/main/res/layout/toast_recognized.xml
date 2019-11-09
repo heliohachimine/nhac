@@ -1,46 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@android:color/transparent"
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <RelativeLayout
-        android:id="@+id/layout"
+    <data>
+    </data>
+    <FrameLayout android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
-        android:background="@drawable/background_green_toast"
-        android:layout_gravity="bottom|center">
+        android:background="@android:color/transparent">
 
-        <LinearLayout
+        <RelativeLayout
+            android:id="@+id/layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal">
-            <TextView
-                android:id="@+id/textview"
-                android:gravity="center"
-                android:fontFamily="@font/slimebox"
-                android:textColor="@color/white"
-                android:layout_width="320dp"
-                android:layout_height="46dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="30dp"/>
-        </LinearLayout>
-    </RelativeLayout>
+            android:layout_marginTop="45dp"
+            android:background="@drawable/background_green_toast"
+            android:layout_gravity="bottom|center">
 
-    <FrameLayout
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="start"
-        android:background="@color/transparent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal">
+                <TextView
+                    android:id="@+id/textview"
+                    android:gravity="center"
+                    android:fontFamily="@font/slimebox"
+                    android:textSize="20dp"
+                    android:textColor="@color/white"
+                    android:layout_width="320dp"
+                    android:layout_height="46dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="30dp"/>
+            </LinearLayout>
+        </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/img_fruit"
+        <FrameLayout
             android:layout_width="100dp"
             android:layout_height="100dp"
-            tools:src="@drawable/morango"
-            android:layout_gravity="center|top"/>
+            android:layout_gravity="start"
+            android:background="@color/transparent">
 
+            <ImageView
+                android:id="@+id/img_fruit"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                tools:src="@drawable/morango"
+                android:layout_gravity="center|top"/>
+
+        </FrameLayout>
     </FrameLayout>
-</FrameLayout>
+</layout>

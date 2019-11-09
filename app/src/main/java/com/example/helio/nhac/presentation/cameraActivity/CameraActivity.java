@@ -36,6 +36,7 @@ import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.logging.Logger;
 
 import io.fotoapparat.Fotoapparat;
 import io.fotoapparat.result.BitmapPhoto;
@@ -59,6 +60,7 @@ public class CameraActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         toast = new RecognizeToast(this);
+        toast.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         FirebaseApp.initializeApp(this);
         FirebaseModelDownloadConditions conditions = new FirebaseModelDownloadConditions.Builder()
                 .build();
@@ -123,7 +125,6 @@ public class CameraActivity extends AppCompatActivity {
     }
 
     private void doImageRecognition(Bitmap bitmapPhoto) throws FirebaseMLException {
-
         if (modelIsDownloaded) {
             FirebaseApp.initializeApp(this);
             FirebaseVisionImage firebaseVisionImage = FirebaseVisionImage.fromBitmap(bitmapPhoto);
@@ -134,60 +135,39 @@ public class CameraActivity extends AppCompatActivity {
                             new OnSuccessListener<List<FirebaseVisionImageLabel>>() {
                                 @Override
                                 public void onSuccess(List<FirebaseVisionImageLabel> it) {
-//                                    progress.dismiss();
-                                    sparkles.cancelAnimation();
-                                    sparkles.setVisibility(View.GONE);
-
+                                    cancelSparkles();
                                     if (it.size() == 0) {
-                                        Toast.makeText(getApplicationContext(), "Não foi possivel reconhecer", Toast.LENGTH_SHORT).show();
-                                    }
-                                    for (FirebaseVisionImageLabel label: it) {
-                                        Log.d("LIST", label.getText());
-                                        if (label.getConfidence() < 0.6) {
-//                                            Toast.makeText(getApplicationContext(), "Acho que pode ser " + label.getText(), Toast.LENGTH_SHORT).show();
-                                            switch (label.getText()) {
-                                                case "broccoli":
-                                                    textToast = getString(R.string.broccoli);
-                                                    imageToast = R.drawable.brocolis;
-                                                    break;
-                                                case "carrot":
-                                                    textToast = getString(R.string.carrot);
-                                                    imageToast = R.drawable.cenoura;
-                                                    break;
-                                                case "tomato":
-                                                    textToast = getString(R.string.tomato);
-                                                    imageToast = R.drawable.tomate;
-                                                    break;
-                                                default:
-                                                    textToast = "Sem detalhes";
-                                                    imageToast = R.drawable.abacate;
-                                                    break;
+                                        setErrorCustomToast(getString(R.string.error_recognize));
+                                        toast.show();
+                                    } else {
+                                        for (FirebaseVisionImageLabel label : it) {
+                                            Log.d("LIST", label.getText());
+                                            if (label.getConfidence() > 0.8 && dao.activate(label.getText())) {
+                                                //TODO fazer um enum para os produtos
+                                                switch (label.getText()) {
+                                                    case "broccoli":
+                                                        setCustomToast(R.drawable.brocolis, getString(R.string.broccoli));
+                                                        toast.show();
+                                                        break;
+                                                    case "carrot":
+                                                        setCustomToast(R.drawable.cenoura, getString(R.string.carrot));
+                                                        toast.show();
+                                                        break;
+                                                    case "tomato":
+                                                        setCustomToast(R.drawable.tomate, getString(R.string.tomato));
+                                                        toast.show();
+                                                        break;
+                                                    default:
+                                                        textToast = "Sem detalhes";
+                                                        imageToast = R.drawable.abacate;
+                                                        toast.show();
+                                                        break;
+                                                }
+
+
                                             }
-                                            toast.show();
-//                                            textToast = "";
                                         }
-                                        else if (label.getConfidence() > 0.6)
-                                            dao.activate(label.getText());
-                                            switch (label.getText()) {
-                                                case "broccoli":
-                                                    textToast = getString(R.string.broccoli);
-                                                    imageToast = R.drawable.brocolis;
-                                                    break;
-                                                case "carrot":
-                                                    textToast = getString(R.string.carrot);
-                                                    imageToast = R.drawable.cenoura;
-                                                    break;
-                                                case "tomato":
-                                                    textToast = getString(R.string.tomato);
-                                                    imageToast = R.drawable.tomate;
-                                                    break;
-                                                default:
-                                                    textToast = "Sem detalhes";
-                                                    imageToast = R.drawable.abacate;
-                                                    break;
-                                            }
-                                            toast.show();
-//                                            Toast.makeText(getApplicationContext(), label.getText(), Toast.LENGTH_SHORT ).show();
+
                                     }
 
                                 }
@@ -197,12 +177,30 @@ public class CameraActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     Log.d("LIST", e.getMessage());
-                    sparkles.cancelAnimation();
-                    sparkles.setVisibility(View.GONE);
-                    Toast.makeText(getApplicationContext(), "Não foi possivel reconhecer", Toast.LENGTH_SHORT).show();
+                    cancelSparkles();
+                    setErrorCustomToast(getString(R.string.error_mlkit));
+                    toast.show();
                 }
             });
+        } else {
+            cancelSparkles();
+            setErrorCustomToast(getString(R.string.error_internet));
+            toast.show();
         }
+    }
+
+    private void cancelSparkles() {
+        sparkles.cancelAnimation();
+        sparkles.setVisibility(View.GONE);
+    }
+
+    private void setCustomToast(int image, String name) {
+        this.imageToast = image;
+        this.textToast = name;
+    }
+
+    private void setErrorCustomToast(String error) {
+        setCustomToast(R.drawable.abacaxi, error);
     }
 
 }

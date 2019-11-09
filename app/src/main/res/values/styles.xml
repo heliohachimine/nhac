@@ -7,11 +7,16 @@
 
         <!-- enable window content transitions -->
         <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowContentTransitions">true</item>
 
         <!-- specify enter and exit transitions -->
         <!--<item name="android:windowEnterTransition">@transition/explode</item>-->
         <!--<item name="android:windowExitTransition">@transition/explode</item>-->
 
+    </style>
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@android:anim/slide_in_left</item>
+        <item name="android:windowExitAnimation">@android:anim/slide_out_right</item>
     </style>
 
 </resources>

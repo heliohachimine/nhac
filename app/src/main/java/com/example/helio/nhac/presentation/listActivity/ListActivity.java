@@ -55,7 +55,7 @@ public class ListActivity extends AppCompatActivity {
                 fruitArrayList = dao.getAll();
             }
         }
-        mAdapter = new StickerAdapter(fruitArrayList);
+        mAdapter = new StickerAdapter(this, fruitArrayList);
         mRecyclerView.setAdapter(mAdapter);
         int resId = R.anim.grid_layout_animation;
         LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(this, resId);
@@ -122,7 +122,7 @@ public class ListActivity extends AppCompatActivity {
         fruitArrayList.add(new Fruit("tomato", "tomate", true, R.drawable.tomate, getString(R.string.tomato_details)));
         fruitArrayList.add(new Fruit("strawberry", "morango", true, R.drawable.morango, getString(R.string.strawberry_details)));
         fruitArrayList.add(new Fruit("watermelon", "melancia", true, R.drawable.melancia, getString(R.string.watermelon_details)));
-        mAdapter = new StickerAdapter(fruitArrayList);
+        mAdapter = new StickerAdapter(this, fruitArrayList);
         mRecyclerView.setAdapter(mAdapter);
     }
 }

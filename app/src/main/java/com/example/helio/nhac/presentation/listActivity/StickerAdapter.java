@@ -1,5 +1,9 @@
 package com.example.helio.nhac.presentation.listActivity;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
@@ -19,9 +23,11 @@ import java.util.ArrayList;
 public class StickerAdapter extends RecyclerView.Adapter<StickerViewHolder> {
 
     private final ArrayList<Fruit> fruitList;
+    private Activity activity;
 
 
-    public StickerAdapter(ArrayList<Fruit> fruitList) {
+    public StickerAdapter(Activity context, ArrayList<Fruit> fruitList) {
+        this.activity = context;
         this.fruitList = fruitList;
     }
     public StickerAdapter(){
@@ -36,7 +42,7 @@ public class StickerAdapter extends RecyclerView.Adapter<StickerViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull StickerViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final StickerViewHolder holder, final int position) {
         holder.imageView.setImageResource(fruitList.get(position).getImage());
 
         if (!fruitList.get(position).getCollected()) {
@@ -57,7 +63,10 @@ public class StickerAdapter extends RecyclerView.Adapter<StickerViewHolder> {
                     intent.putExtra("item_name",fruitList.get(position).getName());
                     intent.putExtra("item_detail",fruitList.get(position).getDetails());
                     intent.putExtra("item_image",fruitList.get(position).getImage());
-                    v.getContext().startActivity(intent);
+                    final View sharedElement = holder.imageView;
+                    sharedElement.setTransitionName("figurinha");
+                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(activity, sharedElement, "figurinha");
+                    v.getContext().startActivity(intent, options.toBundle());
                 }
             });
         }

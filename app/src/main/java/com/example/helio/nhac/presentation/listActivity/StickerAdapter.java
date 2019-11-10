@@ -59,6 +59,7 @@ public class StickerAdapter extends RecyclerView.Adapter<StickerViewHolder> {
             });
         } else {
 //            holder.lottieAnimationView.playAnimation();
+            holder.imageView.setColorFilter(0xFFFFFFFF,  PorterDuff.Mode.MULTIPLY);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

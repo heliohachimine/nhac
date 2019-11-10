@@ -1,6 +1,7 @@
 package com.example.helio.nhac.presentation.cameraActivity;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
@@ -152,6 +153,7 @@ public class CameraActivity extends AppCompatActivity {
                                                 for(Fruit fruit : dao.getAll()) {
                                                     if (label.getText().equals(fruit.getId_name())) {
                                                         showCustomToast(fruit.getImage(), fruit.getName());
+                                                        break;
                                                     }
                                                 }
                                             } else {

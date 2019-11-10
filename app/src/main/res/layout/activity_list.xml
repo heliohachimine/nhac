@@ -1,35 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".presentation.listActivity.ListActivity"
-    android:background="@color/orange_300">
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/title_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_margin"
-        android:text="Alimentos saudáveis"
-        android:textColor="#FFFFFF"
-        android:fontFamily="@font/slimebox"
-        android:textSize="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+<layout>
 
-    <com.example.helio.nhac.model.GridRecyclerView
-        android:id="@+id/recycler_view_layout_recycler"
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/default_margin"
-        android:footerDividersEnabled="false"
-        android:layoutAnimation="@anim/grid_layout_animation"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title_list"
-        app:layout_constraintVertical_bias="0.0"
-        tools:listitem="@layout/adapter_health_food" />
+        android:layout_height="match_parent"
+        android:background="@color/orange_300"
+        tools:context=".presentation.listActivity.ListActivity">
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin"
+            android:fontFamily="@font/slimebox"
+            android:text="Alimentos saudáveis"
+            android:textColor="#FFFFFF"
+            android:textSize="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.example.helio.nhac.model.GridRecyclerView
+            android:id="@+id/recycler_view_layout_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/default_margin"
+            android:footerDividersEnabled="false"
+            android:layoutAnimation="@anim/grid_layout_animation"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title_list"
+            app:layout_constraintVertical_bias="0.0"
+            tools:listitem="@layout/adapter_health_food" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

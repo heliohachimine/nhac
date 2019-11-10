@@ -24,7 +24,7 @@ public class FruitDatabase extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String sql = "CREATE TABLE "+ TABELA +"("
                 + ID + " INTEGER primary key autoincrement,"
-                + IMAGE + " INTEGER,"
+                + IMAGE + " TEXT,"
                 + IS_COLLECTED + " INTEGER,"
                 + DETAILS + " TEXT,"
                 + FRUIT_NAME + " TEXT,"

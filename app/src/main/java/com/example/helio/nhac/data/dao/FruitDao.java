@@ -29,6 +29,21 @@ public class FruitDao {
         return controller.getDatabase().insert(FruitDatabase.TABELA, null, cv) > 0;
     }
 
+    public boolean insertList(ArrayList<Fruit> list) {
+        for ( Fruit fruit : list ) {
+            ContentValues cv = new ContentValues();
+            cv.put(FruitDatabase.ID_NAME, fruit.getId_name());
+            cv.put(FruitDatabase.FRUIT_NAME, fruit.getName());
+            cv.put(FruitDatabase.DETAILS, fruit.getDetails());
+            cv.put(FruitDatabase.IMAGE, fruit.getImage());
+            cv.put(FruitDatabase.IS_COLLECTED, false);
+            if(controller.getDatabase().insert(FruitDatabase.TABELA, null, cv) <= 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public boolean activate(String id_name) {
         String clause = FruitDatabase.ID_NAME + "= '" + id_name + "'";
         ContentValues cv = new ContentValues();
@@ -44,9 +59,9 @@ public class FruitDao {
             String id_name = cursor.getString(cursor.getColumnIndex(FruitDatabase.ID_NAME));
             String fruit_name = cursor.getString(cursor.getColumnIndex(FruitDatabase.FRUIT_NAME));
             String details = cursor.getString(cursor.getColumnIndex(FruitDatabase.DETAILS));
-            int image = cursor.getInt(cursor.getColumnIndex(FruitDatabase.IMAGE));
+            byte[] image = cursor.getBlob(cursor.getColumnIndex(FruitDatabase.IMAGE));
             boolean isCollected = cursor.getInt(cursor.getColumnIndex(FruitDatabase.IS_COLLECTED)) > 0;
-            fruits.add(new Fruit(id_name, fruit_name, isCollected, image, details));
+            fruits.add(new Fruit(id_name, fruit_name, details, isCollected, image));
         }
         cursor.close();
         return fruits;

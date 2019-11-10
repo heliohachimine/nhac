@@ -1,41 +1,39 @@
 package com.example.helio.nhac.presentation;
 
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.databinding.DataBindingUtil;
 
 import com.example.helio.nhac.R;
+import com.example.helio.nhac.databinding.ActivityDetailBinding;
 
 import java.util.Locale;
 
-public class DetailActivity extends AppCompatActivity {
-    TextView title;
-    ImageView image;
-    TextView details;
+    public class DetailActivity extends AppCompatActivity {
     TextToSpeech tts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
+        ActivityDetailBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_detail);
         getSupportActionBar().hide();
         getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.light_blue_500));
 
+        binding.detailTitle.setText(getIntent().getStringExtra("item_name"));
+        binding.textviewDetails.setText(getIntent().getStringExtra("item_detail"));
 
-        title = findViewById(R.id.detail_title);
-        title.setText(getIntent().getStringExtra("item_name"));
-        details = findViewById(R.id.textview_details);
-        details.setText(getIntent().getStringExtra("item_detail"));
-        image = findViewById(R.id.detail_image);
-        image.setImageResource(getIntent().getIntExtra("item_image",0));
+        byte[] decodedString = Base64.decode(getIntent().getExtras().getByteArray("item_image"), Base64.DEFAULT);
+        binding.detailImage.setImageBitmap(BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length));
+
         setTextToSpeech();
-        findViewById(R.id.speaker).setOnClickListener(new View.OnClickListener() {
+        binding.speaker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 tts.speak(getIntent().getStringExtra("item_detail"), TextToSpeech.QUEUE_FLUSH, null);

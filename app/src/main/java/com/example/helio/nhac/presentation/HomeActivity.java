@@ -6,8 +6,10 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.databinding.DataBindingUtil;
 
 import com.example.helio.nhac.R;
+import com.example.helio.nhac.databinding.ActivityHomeBinding;
 import com.example.helio.nhac.presentation.cameraActivity.CameraActivity;
 import com.example.helio.nhac.presentation.listActivity.ListActivity;
 
@@ -18,17 +20,17 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
         getSupportActionBar().hide();
+        ActivityHomeBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
         getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.purple_300));
-        findViewById(R.id.home_camera_button).setOnClickListener(new OnClickListener() {
+        binding.homeCameraButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), CameraActivity.class);
                 startActivity(intent);
             }
         });
-        findViewById(R.id.home_list_button).setOnClickListener(new OnClickListener() {
+        binding.homeListButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), ListActivity.class);

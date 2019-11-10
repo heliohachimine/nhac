@@ -5,7 +5,9 @@ import android.app.ActivityOptions;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.graphics.PorterDuff;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +45,8 @@ public class StickerAdapter extends RecyclerView.Adapter<StickerViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull final StickerViewHolder holder, final int position) {
-        holder.imageView.setImageResource(fruitList.get(position).getImage());
+        byte[] decodedString = Base64.decode(fruitList.get(position).getImage(), Base64.DEFAULT);
+        holder.imageView.setImageBitmap(BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length));
 
         if (!fruitList.get(position).getCollected()) {
             holder.imageView.setColorFilter(R.color.black, PorterDuff.Mode.MULTIPLY);

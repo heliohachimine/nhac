@@ -10,10 +10,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.databinding.DataBindingUtil;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.helio.nhac.R;
 import com.example.helio.nhac.data.dao.FruitDao;
+import com.example.helio.nhac.databinding.ActivityCameraBinding;
+import com.example.helio.nhac.model.Fruit;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -54,13 +57,13 @@ public class CameraActivity extends AppCompatActivity {
     private FruitDao dao;
     private RecognizeToast toast;
     public String textToast;
-    public int imageToast;
+    public byte[] imageToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        toast = new RecognizeToast(this);
-        toast.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        ActivityCameraBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_camera);
+        configureToast();
         FirebaseApp.initializeApp(this);
         FirebaseModelDownloadConditions conditions = new FirebaseModelDownloadConditions.Builder()
                 .build();
@@ -74,13 +77,12 @@ public class CameraActivity extends AppCompatActivity {
                     }
                 });
         dao = new FruitDao(this);
-        setContentView(R.layout.activity_camera);
-        cameraView = findViewById(R.id.cameraView);
-        sparkles = findViewById(R.id.anim_sparkles);
+        cameraView = binding.cameraView;
+        sparkles = binding.animSparkles;
         Objects.requireNonNull(getSupportActionBar()).hide();
         getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.yellow_300));
         verifyPermission();
-        findViewById(R.id.camera_button).setOnClickListener(new View.OnClickListener() {
+        binding.cameraButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 takePicture();
@@ -89,6 +91,11 @@ public class CameraActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void configureToast() {
+        toast = new RecognizeToast(this);
+        toast.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
     }
 
     private void verifyPermission() {
@@ -137,34 +144,18 @@ public class CameraActivity extends AppCompatActivity {
                                 public void onSuccess(List<FirebaseVisionImageLabel> it) {
                                     cancelSparkles();
                                     if (it.size() == 0) {
-                                        setErrorCustomToast(getString(R.string.error_recognize));
-                                        toast.show();
+                                        showErrorCustomToast(getString(R.string.error_recognize));
                                     } else {
                                         for (FirebaseVisionImageLabel label : it) {
                                             Log.d("LIST", label.getText());
-                                            if (label.getConfidence() > 0.8 && dao.activate(label.getText())) {
-                                                //TODO fazer um enum para os produtos
-                                                switch (label.getText()) {
-                                                    case "broccoli":
-                                                        setCustomToast(R.drawable.brocolis, getString(R.string.broccoli));
-                                                        toast.show();
-                                                        break;
-                                                    case "carrot":
-                                                        setCustomToast(R.drawable.cenoura, getString(R.string.carrot));
-                                                        toast.show();
-                                                        break;
-                                                    case "tomato":
-                                                        setCustomToast(R.drawable.tomate, getString(R.string.tomato));
-                                                        toast.show();
-                                                        break;
-                                                    default:
-                                                        textToast = "Sem detalhes";
-                                                        imageToast = R.drawable.abacate;
-                                                        toast.show();
-                                                        break;
+                                            if (label.getConfidence() > 0.4 && dao.activate(label.getText())) {
+                                                for(Fruit fruit : dao.getAll()) {
+                                                    if (label.getText().equals(fruit.getId_name())) {
+                                                        showCustomToast(fruit.getImage(), fruit.getName());
+                                                    }
                                                 }
-
-
+                                            } else {
+                                                showErrorCustomToast(getString(R.string.error_recognize));
                                             }
                                         }
 
@@ -178,14 +169,12 @@ public class CameraActivity extends AppCompatActivity {
                 public void onFailure(@NonNull Exception e) {
                     Log.d("LIST", e.getMessage());
                     cancelSparkles();
-                    setErrorCustomToast(getString(R.string.error_mlkit));
-                    toast.show();
+                    showErrorCustomToast(getString(R.string.error_mlkit));
                 }
             });
         } else {
             cancelSparkles();
-            setErrorCustomToast(getString(R.string.error_internet));
-            toast.show();
+            showErrorCustomToast(getString(R.string.error_internet));
         }
     }
 
@@ -194,13 +183,16 @@ public class CameraActivity extends AppCompatActivity {
         sparkles.setVisibility(View.GONE);
     }
 
-    private void setCustomToast(int image, String name) {
+    private void showCustomToast(byte[] image, String name) {
         this.imageToast = image;
         this.textToast = name;
+        toast.show();
     }
 
-    private void setErrorCustomToast(String error) {
-        setCustomToast(R.drawable.abacaxi, error);
+    private void showErrorCustomToast(String error) {
+        this.imageToast = null;
+        this.textToast = error;
+        toast.show();
     }
 
 }

@@ -7,22 +7,31 @@ public class Fruit implements Parcelable {
     private String id_name;
     private String name;
     private Boolean isCollected;
-    private int image;
+    private byte [] image;
     private String details;
 
-    public Fruit(String id_name, String name, Boolean isCollected, int image){
+    public Fruit(String id_name, String name, String details, Boolean isCollected, byte [] image){
         this.id_name = id_name;
         this.name = name;
-        this.isCollected = isCollected;
-        this.image = image;
-        this.details = "Informações sobre " + name;
-    }
-    public Fruit(String id_name, String name, Boolean isCollected, int image, String details){
-        this.id_name = id_name;
-        this.name = name;
-        this.isCollected = isCollected;
-        this.image = image;
         this.details = details;
+        this.isCollected = isCollected;
+        this.image = image;
+    }
+
+    public static final Creator<Fruit> CREATOR = new Creator<Fruit>() {
+        @Override
+        public Fruit createFromParcel(Parcel in) {
+            return new Fruit(in);
+        }
+
+        @Override
+        public Fruit[] newArray(int size) {
+            return new Fruit[size];
+        }
+    };
+
+    public Fruit(Parcel in) {
+
     }
 
     public String getId_name() {
@@ -49,11 +58,11 @@ public class Fruit implements Parcelable {
         isCollected = collected;
     }
 
-    public int getImage() {
+    public byte [] getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(byte [] image) {
         this.image = image;
     }
 
@@ -72,6 +81,10 @@ public class Fruit implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-
+        dest.writeString(id_name);
+        dest.writeString(name);
+        dest.writeByte((byte) (isCollected == null ? 0 : isCollected ? 1 : 2));
+        dest.writeByteArray(image);
+        dest.writeString(details);
     }
 }

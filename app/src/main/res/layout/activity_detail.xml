@@ -1,94 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/light_blue_500"
-    tools:context=".presentation.DetailActivity">
-    <View
-        android:id="@+id/border_img"
-        android:layout_width="300dp"
-        android:layout_height="250dp"
-        android:background="@drawable/background_img_detail"
-        app:layout_constraintTop_toTopOf="@id/detail_image"
-        app:layout_constraintStart_toStartOf="@id/detail_image"
-        app:layout_constraintEnd_toEndOf="@id/detail_image"
-        app:layout_constraintBottom_toBottomOf="@id/detail_image"
-        />
+<layout>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/detail_title"
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/slimebox"
-        android:textSize="40dp"
-        android:textColor="@color/white"
-        android:textAlignment="center"
-        android:layout_marginTop="@dimen/default_margin"
-        android:layout_marginHorizontal="@dimen/default_margin"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:text="Limão"/>
+        android:layout_height="match_parent"
+        android:background="@color/light_blue_500"
+        tools:context=".presentation.DetailActivity">
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        app:lottie_rawRes="@raw/confetti"
-        app:lottie_loop="false"
-        app:lottie_autoPlay="true"
-        app:layout_constraintTop_toBottomOf="@id/detail_title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/detail_image"/>
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/detail_image"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="@dimen/default_margin"
-        android:transitionName="figurinha"
-        android:layout_marginHorizontal="@dimen/default_margin"
-        app:layout_constraintTop_toBottomOf="@id/detail_title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:src="@drawable/limao"/>
+        <View
+            android:id="@+id/border_img"
+            android:layout_width="300dp"
+            android:layout_height="250dp"
+            android:background="@drawable/background_img_detail"
+            app:layout_constraintBottom_toBottomOf="@id/detail_image"
+            app:layout_constraintEnd_toEndOf="@id/detail_image"
+            app:layout_constraintStart_toStartOf="@id/detail_image"
+            app:layout_constraintTop_toTopOf="@id/detail_image" />
 
-    <TextView
-        android:id="@+id/did_you_know"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Voce sabia?"
-        android:fontFamily="@font/slimebox"
-        android:textColor="@color/white"
-        android:textSize="@dimen/default_margin"
-        android:layout_margin="@dimen/large_margin"
-        app:layout_constraintTop_toBottomOf="@id/border_img"
-        app:layout_constraintStart_toStartOf="parent"
-        />
-    <ImageView
-        android:id="@+id/speaker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/default_margin"
-        android:src="@drawable/ic_speaker"
-        app:layout_constraintTop_toTopOf="@id/did_you_know"
-        app:layout_constraintBottom_toBottomOf="@id/did_you_know"
-        app:layout_constraintStart_toEndOf="@id/did_you_know"
-        app:layout_constraintEnd_toEndOf="parent"/>
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textview_details"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/default_margin"
-        android:fontFamily="@font/slimebox"
-        android:textColor="@color/white"
-        android:textSize="@dimen/default_margin"
-        app:layout_constraintTop_toBottomOf="@id/did_you_know"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:text="dgudfgfasfhsdhugu asdhuafgua sdhf afuhsau as dafhuas d"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/detail_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:fontFamily="@font/slimebox"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Limão" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            app:layout_constraintBottom_toBottomOf="@id/detail_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/detail_title"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="false"
+            app:lottie_rawRes="@raw/confetti" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/detail_image"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:transitionName="figurinha"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/detail_title"
+            tools:src="@drawable/limao" />
+
+        <TextView
+            android:id="@+id/did_you_know"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/large_margin"
+            android:fontFamily="@font/slimebox"
+            android:text="Voce sabia?"
+            android:textColor="@color/white"
+            android:textSize="@dimen/default_margin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/border_img" />
+
+        <ImageView
+            android:id="@+id/speaker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin"
+            android:src="@drawable/ic_speaker"
+            app:layout_constraintBottom_toBottomOf="@id/did_you_know"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/did_you_know"
+            app:layout_constraintTop_toTopOf="@id/did_you_know" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textview_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin"
+            android:fontFamily="@font/slimebox"
+            android:textColor="@color/white"
+            android:textSize="@dimen/default_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/did_you_know"
+            tools:text="dgudfgfasfhsdhugu asdhuafgua sdhf afuhsau as dafhuas d" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

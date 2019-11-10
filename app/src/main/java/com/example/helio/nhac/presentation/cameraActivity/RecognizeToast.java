@@ -1,8 +1,10 @@
 package com.example.helio.nhac.presentation.cameraActivity;
 
 import android.app.Dialog;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -27,7 +29,13 @@ public class RecognizeToast extends Dialog {
         setContentView(binding.getRoot());
         getWindow().setBackgroundDrawable(new ColorDrawable(activity.getResources().getColor(R.color.transparent)));
         binding.textview.setText(activity.textToast);
-        binding.imgFruit.setImageResource(activity.imageToast);
+        if (activity.imageToast != null) {
+            byte[] decodedString = Base64.decode(activity.imageToast, Base64.DEFAULT);
+            binding.imgFruit.setImageBitmap(BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length));
+        } else {
+            binding.imgFruit.setImageResource(R.drawable.morangocamera);
+        }
+
         binding.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

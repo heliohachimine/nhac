@@ -15,6 +15,8 @@ import androidx.databinding.DataBindingUtil;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.helio.nhac.R;
+import com.example.helio.nhac.core.Keys;
+import com.example.helio.nhac.core.NhacConstantes;
 import com.example.helio.nhac.data.dao.FruitDao;
 import com.example.helio.nhac.databinding.ActivityCameraBinding;
 import com.example.helio.nhac.model.Fruit;
@@ -68,7 +70,7 @@ public class CameraActivity extends AppCompatActivity {
         FirebaseApp.initializeApp(this);
         FirebaseModelDownloadConditions conditions = new FirebaseModelDownloadConditions.Builder()
                 .build();
-        remoteModel = new FirebaseAutoMLRemoteModel.Builder("vegetais_20191013174649").build();
+        remoteModel = new FirebaseAutoMLRemoteModel.Builder(Keys.MLKIT_MODEL).build();
 
         FirebaseModelManager.getInstance().download(remoteModel, conditions)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {

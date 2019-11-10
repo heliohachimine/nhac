@@ -1,37 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/background_sticker"
-    android:id="@+id/htab_maincontent"
-    android:layout_margin="@dimen/short_margin"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/animation"
-        android:layout_width="180dp"
-        android:layout_height="180dp"
-        android:visibility="gone"
-        app:lottie_rawRes="@raw/confetti"
-        app:lottie_loop="false"
-        app:lottie_autoPlay="false"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="constant"
+            type="com.example.helio.nhac.core.NhacConstants" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/htab_maincontent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/short_margin"
+        android:background="@drawable/background_sticker">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animation"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="false"
+            app:lottie_loop="false"
+            app:lottie_rawRes="@raw/confetti" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image"
             android:layout_width="180dp"
             android:layout_height="180dp"
             android:layout_margin="@dimen/short_margin"
-            android:transitionName="figurinha"
+            android:transitionName="@{constant.SHARED_ELEMENT_STICKER}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/morangocamera" />
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

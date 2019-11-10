@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helio.nhac.R;
+import com.example.helio.nhac.core.NhacConstants;
 import com.example.helio.nhac.data.dao.FruitDao;
 import com.example.helio.nhac.databinding.ActivityListBinding;
 import com.example.helio.nhac.model.Fruit;
@@ -33,7 +34,7 @@ public class ListActivity extends AppCompatActivity {
     private StickerAdapter mAdapter;
     private ArrayList<Fruit> fruitArrayList = new ArrayList<>();
     private ActivityListBinding binding;
-    private DatabaseReference database = FirebaseDatabase.getInstance().getReference().child("veggies");
+    private DatabaseReference database = FirebaseDatabase.getInstance().getReference().child(NhacConstants.FIREBASE_TABLE_VEGGIES);
     FruitDao dao;
 
     @Override
@@ -74,10 +75,10 @@ public class ListActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 fruitArrayList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    String id = snapshot.child("id_name").getValue(String.class);
-                    String details = snapshot.child("details").getValue(String.class);
-                    String name = snapshot.child("name").getValue(String.class);
-                    String image = snapshot.child("image").getValue(String.class);
+                    String id = snapshot.child(NhacConstants.FIREBASE_ID_NAME).getValue(String.class);
+                    String details = snapshot.child(NhacConstants.FIREBASE_DETAILS).getValue(String.class);
+                    String name = snapshot.child(NhacConstants.FIREBASE_NAME).getValue(String.class);
+                    String image = snapshot.child(NhacConstants.FIREBASE_IMAGE).getValue(String.class);
                     Fruit fruit = new Fruit(id, name, details, false, image.getBytes());
                     fruitArrayList.add(fruit);
                 }

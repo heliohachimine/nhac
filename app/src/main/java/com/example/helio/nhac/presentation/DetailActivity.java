@@ -15,15 +15,16 @@ import com.example.helio.nhac.R;
 import com.example.helio.nhac.databinding.ActivityDetailBinding;
 
 import java.util.Locale;
+import java.util.Objects;
 
-    public class DetailActivity extends AppCompatActivity {
+public class DetailActivity extends AppCompatActivity {
     TextToSpeech tts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityDetailBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_detail);
-        getSupportActionBar().hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
         getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.light_blue_500));
 
         binding.detailTitle.setText(getIntent().getStringExtra("item_name"));

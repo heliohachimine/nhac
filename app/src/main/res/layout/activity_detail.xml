@@ -2,7 +2,9 @@
 <layout>
 
     <data>
-
+        <variable
+            name="constant"
+            type="com.example.helio.nhac.core.NhacConstants" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -55,11 +57,10 @@
             android:layout_height="200dp"
             android:layout_marginHorizontal="@dimen/default_margin"
             android:layout_marginTop="@dimen/default_margin"
-            android:transitionName="figurinha"
+            android:transitionName="sticker"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detail_title"
-            tools:src="@drawable/limao" />
+            app:layout_constraintTop_toBottomOf="@id/detail_title" />
 
         <TextView
             android:id="@+id/did_you_know"

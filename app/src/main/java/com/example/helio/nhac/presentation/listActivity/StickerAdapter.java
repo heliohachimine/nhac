@@ -2,8 +2,6 @@ package com.example.helio.nhac.presentation.listActivity;
 
 import android.app.Activity;
 import android.app.ActivityOptions;
-import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.PorterDuff;
@@ -17,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helio.nhac.R;
+import com.example.helio.nhac.core.NhacConstants;
 import com.example.helio.nhac.model.Fruit;
 import com.example.helio.nhac.presentation.DetailActivity;
 
@@ -50,15 +49,13 @@ public class StickerAdapter extends RecyclerView.Adapter<StickerViewHolder> {
 
         if (!fruitList.get(position).getCollected()) {
             holder.imageView.setColorFilter(R.color.black, PorterDuff.Mode.MULTIPLY);
-//            holder.lottieAnimationView.setVisibility(View.GONE);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(v.getContext(), "Figurinha bloqueada", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext(), activity.getString(R.string.sticker_is_blocked), Toast.LENGTH_SHORT).show();
                 }
             });
         } else {
-//            holder.lottieAnimationView.playAnimation();
             holder.imageView.setColorFilter(0xFFFFFFFF,  PorterDuff.Mode.MULTIPLY);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -68,8 +65,8 @@ public class StickerAdapter extends RecyclerView.Adapter<StickerViewHolder> {
                     intent.putExtra("item_detail",fruitList.get(position).getDetails());
                     intent.putExtra("item_image",fruitList.get(position).getImage());
                     final View sharedElement = holder.imageView;
-                    sharedElement.setTransitionName("figurinha");
-                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(activity, sharedElement, "figurinha");
+                    sharedElement.setTransitionName(NhacConstants.SHARED_ELEMENT_STICKER);
+                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(activity, sharedElement, NhacConstants.SHARED_ELEMENT_STICKER);
                     v.getContext().startActivity(intent, options.toBundle());
                 }
             });

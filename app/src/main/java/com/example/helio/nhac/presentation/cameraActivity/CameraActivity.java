@@ -1,7 +1,6 @@
 package com.example.helio.nhac.presentation.cameraActivity;
 
 import android.Manifest;
-import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,7 +15,6 @@ import androidx.databinding.DataBindingUtil;
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.helio.nhac.R;
 import com.example.helio.nhac.core.Keys;
-import com.example.helio.nhac.core.NhacConstantes;
 import com.example.helio.nhac.data.dao.FruitDao;
 import com.example.helio.nhac.databinding.ActivityCameraBinding;
 import com.example.helio.nhac.model.Fruit;
@@ -42,7 +40,6 @@ import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.logging.Logger;
 
 import io.fotoapparat.Fotoapparat;
 import io.fotoapparat.result.BitmapPhoto;
@@ -112,6 +109,7 @@ public class CameraActivity extends AppCompatActivity {
             @Override
             public void onPermissionDenied(PermissionDeniedResponse response) {
                 Toast.makeText(getBaseContext(), "Sem essa permissão não é possível continuar.", Toast.LENGTH_SHORT).show();
+                finish();
             }
 
             @Override

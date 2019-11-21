@@ -119,6 +119,7 @@ public class CameraActivity extends AppCompatActivity {
 
     private void takePicture() {
         PhotoResult photo = fotoapparat.takePicture();
+        Log.d("Fotoapparat",photo.toString());
         photo.toBitmap().whenDone(new WhenDoneListener<BitmapPhoto>() {
             @Override
             public void whenDone(BitmapPhoto bitmap) {
@@ -130,9 +131,11 @@ public class CameraActivity extends AppCompatActivity {
             }
         });
 
+
     }
 
     private void doImageRecognition(Bitmap bitmapPhoto) throws FirebaseMLException {
+        Log.d("Foto", bitmapPhoto.toString());
         if (modelIsDownloaded) {
             FirebaseApp.initializeApp(this);
             FirebaseVisionImage firebaseVisionImage = FirebaseVisionImage.fromBitmap(bitmapPhoto);
@@ -165,7 +168,6 @@ public class CameraActivity extends AppCompatActivity {
 
                                 }
                             }
-
                     ).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
@@ -197,4 +199,9 @@ public class CameraActivity extends AppCompatActivity {
         toast.show();
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        fotoapparat.stop();
+    }
 }

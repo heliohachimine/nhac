@@ -75,12 +75,14 @@ public class ListActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 fruitArrayList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    String id = snapshot.child(NhacConstants.FIREBASE_ID_NAME).getValue(String.class);
-                    String details = snapshot.child(NhacConstants.FIREBASE_DETAILS).getValue(String.class);
-                    String name = snapshot.child(NhacConstants.FIREBASE_NAME).getValue(String.class);
-                    String image = snapshot.child(NhacConstants.FIREBASE_IMAGE).getValue(String.class);
-                    Fruit fruit = new Fruit(id, name, details, false, image.getBytes());
-                    fruitArrayList.add(fruit);
+                    if (snapshot.child(NhacConstants.FIREBASE_ENABLE).getValue(Integer.class) == 1){
+                        String id = snapshot.child(NhacConstants.FIREBASE_ID_NAME).getValue(String.class);
+                        String details = snapshot.child(NhacConstants.FIREBASE_DETAILS).getValue(String.class);
+                        String name = snapshot.child(NhacConstants.FIREBASE_NAME).getValue(String.class);
+                        String image = snapshot.child(NhacConstants.FIREBASE_IMAGE).getValue(String.class);
+                        Fruit fruit = new Fruit(id, name, details, false, image.getBytes());
+                        fruitArrayList.add(fruit);
+                    }
                 }
                 dao.insertList(fruitArrayList);
                 binding.loading.cancelAnimation();

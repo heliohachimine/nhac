@@ -130,8 +130,6 @@ public class CameraActivity extends AppCompatActivity {
                 }
             }
         });
-
-
     }
 
     private void doImageRecognition(Bitmap bitmapPhoto) throws FirebaseMLException {

@@ -55,15 +55,11 @@ public class CameraActivity extends AppCompatActivity {
     private FirebaseAutoMLRemoteModel remoteModel;
     private Boolean modelIsDownloaded = false;
     private FruitDao dao;
-    private RecognizeToast toast;
-    public String textToast;
-    public byte[] imageToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityCameraBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_camera);
-        configureToast();
         FirebaseApp.initializeApp(this);
         FirebaseModelDownloadConditions conditions = new FirebaseModelDownloadConditions.Builder()
                 .build();
@@ -91,11 +87,6 @@ public class CameraActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-    private void configureToast() {
-        toast = new RecognizeToast(this);
-        toast.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
     }
 
     private void verifyPermission() {
@@ -145,20 +136,21 @@ public class CameraActivity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(List<FirebaseVisionImageLabel> it) {
                                     cancelSparkles();
-                                    if (it.size() == 0) {
-                                        showErrorCustomToast(getString(R.string.error_recognize));
+                                    if (it.isEmpty()) {
+                                        showToast(getString(R.string.error_recognize), null);
+
                                     } else {
                                         for (FirebaseVisionImageLabel label : it) {
-                                            Log.d("LIST", label.getText());
-                                            if (label.getConfidence() > 0.4 && dao.activate(label.getText())) {
+                                            Log.d("LIST", label.getText() + label.getConfidence());
+                                            if (label.getConfidence() > 0.6 && dao.activate(label.getText())) {
                                                 for(Fruit fruit : dao.getAll()) {
                                                     if (label.getText().equals(fruit.getId_name())) {
-                                                        showCustomToast(fruit.getImage(), fruit.getName());
+                                                        showToast(fruit.getName(), fruit.getImage());
                                                         break;
                                                     }
                                                 }
                                             } else {
-                                                showErrorCustomToast(getString(R.string.error_recognize));
+                                                showToast(getString(R.string.error_confidence), null);
                                             }
                                         }
 
@@ -171,30 +163,24 @@ public class CameraActivity extends AppCompatActivity {
                 public void onFailure(@NonNull Exception e) {
                     Log.d("LIST", e.getMessage());
                     cancelSparkles();
-                    showErrorCustomToast(getString(R.string.error_mlkit));
+                    showToast(getString(R.string.error_mlkit), null);
                 }
             });
         } else {
             cancelSparkles();
-            showErrorCustomToast(getString(R.string.error_internet));
+            showToast(getString(R.string.error_internet), null);
         }
+    }
+
+    private void showToast(String text, byte[] image) {
+        RecognizeToast toast = new RecognizeToast(this, text, image);
+        toast.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        toast.show();
     }
 
     private void cancelSparkles() {
         sparkles.cancelAnimation();
         sparkles.setVisibility(View.GONE);
-    }
-
-    private void showCustomToast(byte[] image, String name) {
-        this.imageToast = image;
-        this.textToast = name;
-        toast.show();
-    }
-
-    private void showErrorCustomToast(String error) {
-        this.imageToast = null;
-        this.textToast = error;
-        toast.show();
     }
 
     @Override
